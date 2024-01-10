@@ -43,9 +43,6 @@ Grabs statistical network data from your Netgear GS105Ev2
 
 After adding the integration go to [Add Integration](https://my.home-assistant.io/redirect/integrations/) and select **Netgear GS105e Integration**.
 
-
-![image](https://user-images.githubusercontent.com/4140156/118571964-9ac0fa80-b77f-11eb-951e-a5e393157bd0.png)
-
 ## GS105e library
 
 ```python3
