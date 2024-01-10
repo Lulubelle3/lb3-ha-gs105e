@@ -95,6 +95,54 @@ DEVICE_SENSOR_TYPES = [
         device_class=SensorDeviceClass.DURATION,
         icon="mdi:clock",
     ),
+    NetgearSensorEntityDescription(
+        key="sum_port_traffic_rx",
+        name="Traffic Received Over All Ports",
+        entity_category=EntityCategory.DIAGNOSTIC,
+        native_unit_of_measurement=UnitOfInformation.MEGABYTES,
+        device_class=SensorDeviceClass.DATA_SIZE,
+        icon="mdi:download",
+    ),
+    NetgearSensorEntityDescription(
+        key="sum_port_traffic_tx",
+        name="Traffic Transferred Over All Ports",
+        entity_category=EntityCategory.DIAGNOSTIC,
+        native_unit_of_measurement=UnitOfInformation.MEGABYTES,
+        device_class=SensorDeviceClass.DATA_SIZE,
+        icon="mdi:upload",
+    ),
+    NetgearSensorEntityDescription(
+        key="sum_port_traffic_crc_err",
+        name="CRC Error Packets Over All Ports",
+        entity_category=EntityCategory.DIAGNOSTIC,
+        native_unit_of_measurement=None,
+        device_class=None,
+        icon="mdi:tray-alert",
+    ),
+    NetgearSensorEntityDescription(
+        key="sum_port_speed_bps_rx",
+        name="Receiing Over All Ports",
+        entity_category=EntityCategory.DIAGNOSTIC,
+        native_unit_of_measurement=UnitOfDataRate.MEGABYTES_PER_SECOND,
+        device_class=SensorDeviceClass.DATA_SIZE,
+        icon="mdi:download",
+    ),
+    NetgearSensorEntityDescription(
+        key="sum_port_speed_bps_tx",
+        name="Transferring Over All Ports",
+        entity_category=EntityCategory.DIAGNOSTIC,
+        native_unit_of_measurement=UnitOfDataRate.MEGABYTES_PER_SECOND,
+        device_class=SensorDeviceClass.DATA_SIZE,
+        icon="mdi:upload",
+    ),
+    NetgearSensorEntityDescription(
+        key="sum_port_speed_bps_io",
+        name="IO Over All Ports",
+        entity_category=EntityCategory.DIAGNOSTIC,
+        native_unit_of_measurement=UnitOfDataRate.MEGABYTES_PER_SECOND,
+        device_class=SensorDeviceClass.DATA_SIZE,
+        icon="mdi:swap-vertical",
+    ),
 ]
 
 PORT_TEMPLATE = OrderedDict({
@@ -112,6 +160,13 @@ PORT_TEMPLATE = OrderedDict({
         'device_class': SensorDeviceClass.DATA_SIZE,
         'icon': "mdi:upload"
     },
+    'port_{port}_crc_errors': {
+        'name': 'Port {port} CRC Error Packets',
+        'native_unit_of_measurement': None,
+        # 'unit_of_measurement': UnitOfInformation.GIGABYTES,
+        'device_class': None,
+        'icon': "mdi:tray-alert"
+    },
     'port_{port}_speed_rx_mbytes': {
         'name': 'Port {port} Receiving',
         'native_unit_of_measurement': UnitOfDataRate.MEGABYTES_PER_SECOND,
@@ -127,7 +182,7 @@ PORT_TEMPLATE = OrderedDict({
         'icon': "mdi:upload"
     },
     'port_{port}_speed_io_mbytes': {
-        'name': 'Port {port} Receiving',
+        'name': 'Port {port} IO',
         'native_unit_of_measurement': UnitOfDataRate.MEGABYTES_PER_SECOND,
         # 'unit_of_measurement': UnitOfInformation.GIGABYTES,
         'device_class': SensorDeviceClass.DATA_RATE,
