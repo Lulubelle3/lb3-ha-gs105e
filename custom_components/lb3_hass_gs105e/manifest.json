@@ -1,5 +1,5 @@
 {
-  "domain": "lb3-ha-gs105e",
+  "domain": "lb3_hass_gs105e",
   "name": "Netgear GS105e Integration",
   "documentation": "https://github.com/Lulubelle3/lb3-ha-gs105e/blob/main/README.md",
   "config_flow": true,
