@@ -121,7 +121,7 @@ DEVICE_SENSOR_TYPES = [
     ),
     NetgearSensorEntityDescription(
         key="sum_port_speed_bps_rx",
-        name="Receiing Over All Ports",
+        name="Receiving Over All Ports",
         entity_category=EntityCategory.DIAGNOSTIC,
         native_unit_of_measurement=UnitOfDataRate.MEGABYTES_PER_SECOND,
         device_class=SensorDeviceClass.DATA_SIZE,
