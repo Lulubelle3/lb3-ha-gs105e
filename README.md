@@ -1,13 +1,15 @@
-# ckw-ha-gs108e
+# Acknowledgement
+This is a fork of https://github.com/ckarrie/ckw-ha-gs108e with reduced number of ports and some changes to the html parser
+
+# lb3-ha-gs105e
 HomeAssistant Netgear Switch Integration
 
 ## What it does
-Grabs statistical network data from your Netgear GS108Ev3
+Grabs statistical network data from your Netgear GS105Ev2
 
 ## How it works
 1. Connects to the Switch and asks for a cookie (`http://IP_OF_SWITCH/login.cgi`)
-2. ~~Stores the cookie in a local temp directory (`/tmp/.gs108ecookie192.168.178.34`)~~
-3. HTTP-Request send to the Switch twice (`http://IP_OF_SWITCH/portStatistics.cgi`)
+2. HTTP-Request send to the Switch twice (`http://IP_OF_SWITCH/portStatistics.cgi`)
 
 ## Which statistics
 - overall Switch statistics as attributes
@@ -20,7 +22,7 @@ Grabs statistical network data from your Netgear GS108Ev3
   - `sum_port_speed_bps_rx` - Transferred traffic speed (bit/s)
   - `sum_port_speed_bps_io` - Received and transferred traffic speed 
   - `ports` - List of statistics for each Switch port
-- statistics for each Port (8 Ports for GS108Ev4) as attributes
+- statistics for each Port (5 Ports for GS105Ev2) as attributes
   - `port_{port}_traffic_rx_mbytes` - Megabytes received during `response_time_s`
   - `port_{port}_traffic_tx_mbytes` - Megabytes transferred during `response_time_s`
   - `port_{port}_speed_rx_mbytes` - Megabytes received per 1 second
@@ -33,23 +35,23 @@ Grabs statistical network data from your Netgear GS108Ev3
 
 ## How to integrate in your HomeAssistant
 
-[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=ckarrie&repository=ckw-ha-gs108e&category=integration)
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Lulubelle3&repository=lb3-ha-gs105e&category=integration)
 
 1. Goto [HACS > Integrations](http://homeassistant.lan/redirect/hacs/integrations)
 2. Click on the right corner on the vertical dots and select "Custom Repositories"
-3. Add "https://github.com/ckarrie/ckw-ha-gs108e" as Integration
+3. Add "https://github.com/Lulubelle3/lb3-ha-gs105e" as Integration
 
-After adding the integration go to [Add Integration](https://my.home-assistant.io/redirect/integrations/) and select **Netgear GS108e Integration**.
+After adding the integration go to [Add Integration](https://my.home-assistant.io/redirect/integrations/) and select **Netgear GS105e Integration**.
 
 
 ![image](https://user-images.githubusercontent.com/4140156/118571964-9ac0fa80-b77f-11eb-951e-a5e393157bd0.png)
 
-## GS108e library
+## GS105e library
 
 ```python3
-import gs108e
+import gs105e
 import time
-sw = gs108e.GS108Switch("192.168.178.8", "password")
+sw = gs105e.GS105Switch("192.168.178.8", "password")
 sw.get_login_cookie()
 
 while True:
