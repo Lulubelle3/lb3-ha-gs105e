@@ -30,7 +30,7 @@ Grabs statistical network data from your Netgear GS105Ev2
   - `port_{port}_speed_io_mbytes` - Megabytes throughput per 1 second
   - `port_{port}_sum_rx_mbytes` - Megabytes totally received since Switch reboot
   - `port_{port}_sum_tx_mbytes` - Megabytes totally transferred since Switch reboot
-  - ~~`crc_errors` - CRC counter~~
+  - `port_{port}_crc_errors` - CRC error packet counter
 
 
 ## How to integrate in your HomeAssistant
