@@ -20,12 +20,12 @@ from homeassistant.const import (
 
 from .errors import CannotLoginException
 from .const import DOMAIN
-from .gs105e import GS108Switch
+from .gs105e import GS105Switch
 
 
-def get_api(host: str, password: str) -> GS108Switch:
+def get_api(host: str, password: str) -> GS105Switch:
     """Get the Netgear API and login to it."""
-    api: GS108Switch = GS108Switch(host, password)
+    api: GS105Switch = GS105Switch(host, password)
 
     if not api.get_login_cookie():
         raise CannotLoginException
@@ -33,7 +33,7 @@ def get_api(host: str, password: str) -> GS108Switch:
     return api
 
 
-class HAGS108Switch:
+class HAGS105Switch:
     SWITCH_PORTS = 5
 
     def __init__(self, hass: HomeAssistant, entry: ConfigEntry) -> None:
@@ -43,14 +43,14 @@ class HAGS108Switch:
         self.entry_id = entry.entry_id
         self.unique_id = entry.unique_id
         self.device_name = entry.title
-        self.model = "GS108E"
+        self.model = "GS105E"
         self.config = {
             'ports': 5
         }
         self._host: str = entry.data[CONF_HOST]
         self._password = entry.data[CONF_PASSWORD]
 
-        self.api: GS108Switch = None
+        self.api: GS105Switch = None
         self.api_lock = asyncio.Lock()
 
     def _setup(self) -> bool:
@@ -71,11 +71,11 @@ class HAGS108Switch:
             return await self.hass.async_add_executor_job(self.api.get_switch_infos)
 
 
-class HAGS108SwitchCoordinatorEntity(CoordinatorEntity):
+class HAGS105SwitchCoordinatorEntity(CoordinatorEntity):
     """Base class for a Netgear router entity."""
 
     def __init__(
-        self, coordinator: DataUpdateCoordinator, switch: HAGS108Switch
+        self, coordinator: DataUpdateCoordinator, switch: HAGS105Switch
     ) -> None:
         """Initialize a Netgear device."""
         super().__init__(coordinator)
@@ -112,10 +112,10 @@ class HAGS108SwitchCoordinatorEntity(CoordinatorEntity):
         )
 
 
-class HAGS108SwitchEntity(Entity):
+class HAGS105SwitchEntity(Entity):
     """Base class for a Netgear router entity without coordinator."""
 
-    def __init__(self, switch: HAGS108Switch) -> None:
+    def __init__(self, switch: HAGS105Switch) -> None:
         """Initialize a Netgear device."""
         self._switch = switch
         self._name = switch.device_name

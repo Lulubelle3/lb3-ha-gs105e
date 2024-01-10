@@ -33,7 +33,7 @@ from .const import (
     KEY_COORDINATOR_SWITCH_INFOS,
     KEY_SWITCH,
 )
-from .netgear_switch import HAGS108Switch, HAGS108SwitchCoordinatorEntity
+from .netgear_switch import HAGS105Switch, HAGS105SwitchCoordinatorEntity
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -246,7 +246,7 @@ async def async_setup_entry(
     coordinator_switch_infos.data = True
 
 
-class NetgearRouterSensorEntity(HAGS108SwitchCoordinatorEntity, RestoreSensor):
+class NetgearRouterSensorEntity(HAGS105SwitchCoordinatorEntity, RestoreSensor):
     """Representation of a device connected to a Netgear router."""
 
     #_attr_entity_registry_enabled_default = False
@@ -255,7 +255,7 @@ class NetgearRouterSensorEntity(HAGS108SwitchCoordinatorEntity, RestoreSensor):
     def __init__(
         self,
         coordinator: DataUpdateCoordinator,
-        switch: HAGS108Switch,
+        switch: HAGS105Switch,
         entity_description: NetgearSensorEntityDescription,
     ) -> None:
         """Initialize a Netgear device."""

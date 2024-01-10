@@ -7,11 +7,12 @@ from .netgear_crypt import merge, make_md5
 LOGIN_HTM_URL_TMPL = 'http://{ip}/login.htm'
 LOGIN_CGI_URL_TMPL = 'http://{ip}/login.cgi'
 SWITCH_INFO_HTM_URL_TMPL = 'http://{ip}/switch_info.htm'
+SWITCH_INFO_CGI_URL_TMPL = 'http://{ip}/switch_info.cgi'
 PORT_STATISTICS_URL_TMPL = 'http://{ip}/portStatistics.cgi'
 ALLOWED_COOKIE_TYPES = ['GS105SID', 'SID']
 
 
-class GS108Switch(object):
+class GS105Switch(object):
     def __init__(self, host, password):
         self.host = host
         self._password = password
@@ -32,11 +33,11 @@ class GS108Switch(object):
         self._switch_bootloader = 'unknown'
 
     def get_unique_id(self):
-        return 'gs108_' + self.host.replace('.', '_')
+        return 'gs105_' + self.host.replace('.', '_')
 
     def get_login_password(self):
         response = requests.get(
-            LOGIN_HTM_URL_TMPL.format(ip=self.host),
+            LOGIN_CGI_URL_TMPL.format(ip=self.host),
             allow_redirects=False
         )
         tree = html.fromstring(response.content)
@@ -90,7 +91,7 @@ class GS108Switch(object):
             return None
 
     def fetch_switch_infos(self):
-        url = SWITCH_INFO_HTM_URL_TMPL.format(ip=self.host)
+        url = SWITCH_INFO_CGI_URL_TMPL.format(ip=self.host)
         method = 'get'
         return self._request(url=url, method=method)
 
@@ -155,13 +156,13 @@ class GS108Switch(object):
             switch_name = tree.xpath('//input[@id="switch_name"]')[0].value
 
             # Detect Firmware
-            switch_firmware = tree.xpath('//table[@id="tbl1"]/tr[6]/td[2]')[0].text
+            switch_firmware = tree.xpath('//table[@id="tbl2"]//tr[6]/td[2]')[0].text
             if switch_firmware is None:
                 # Fallback older versions
-                switch_firmware = tree.xpath('//table[@id="tbl1"]/tr[4]/td[2]')[0].text
+                switch_firmware = tree.xpath('//table[@id="tbl2"]//tr[4]/td[2]')[0].text
 
-            switch_bootloader_x = tree.xpath('//td[@id="loader"]')
-            switch_serial_number_x = tree.xpath('//table[@id="tbl1"]/tr[3]/td[2]')
+            switch_bootloader_x = tree.xpath('//table[@id="tbl2"]//tr[5]/td[2]')
+            switch_serial_number_x = tree.xpath('//table[@id="tbl2"]//tr[3]/td[2]')
             client_hash_x = tree.xpath('//input[@id="hash"]')
 
             if switch_bootloader_x:
@@ -170,12 +171,6 @@ class GS108Switch(object):
                 switch_serial_number = switch_serial_number_x[0].text
             if client_hash_x:
                 self._client_hash = client_hash_x[0].value
-
-            #print("switch_name", switch_name)
-            #print("switch_bootloader", switch_bootloader)
-            #print("client_hash", client_hash)
-            #print("switch_firmware", switch_firmware)
-            #print("switch_serial_number", switch_serial_number)
 
             # Avoid a second call on next get_switch_infos() call
             self._loaded_switch_infos = {
