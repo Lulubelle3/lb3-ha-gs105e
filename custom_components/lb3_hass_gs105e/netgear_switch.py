@@ -20,7 +20,7 @@ from homeassistant.const import (
 
 from .errors import CannotLoginException
 from .const import DOMAIN
-from .gs108e import GS108Switch
+from .gs105e import GS108Switch
 
 
 def get_api(host: str, password: str) -> GS108Switch:
@@ -34,7 +34,7 @@ def get_api(host: str, password: str) -> GS108Switch:
 
 
 class HAGS108Switch:
-    SWITCH_PORTS = 8
+    SWITCH_PORTS = 5
 
     def __init__(self, hass: HomeAssistant, entry: ConfigEntry) -> None:
         assert entry.unique_id
@@ -45,7 +45,7 @@ class HAGS108Switch:
         self.device_name = entry.title
         self.model = "GS108E"
         self.config = {
-            'ports': 8
+            'ports': 5
         }
         self._host: str = entry.data[CONF_HOST]
         self._password = entry.data[CONF_PASSWORD]

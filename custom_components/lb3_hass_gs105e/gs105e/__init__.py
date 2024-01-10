@@ -8,7 +8,7 @@ LOGIN_HTM_URL_TMPL = 'http://{ip}/login.htm'
 LOGIN_CGI_URL_TMPL = 'http://{ip}/login.cgi'
 SWITCH_INFO_HTM_URL_TMPL = 'http://{ip}/switch_info.htm'
 PORT_STATISTICS_URL_TMPL = 'http://{ip}/portStatistics.cgi'
-ALLOWED_COOKIE_TYPES = ['GS108SID', 'SID']
+ALLOWED_COOKIE_TYPES = ['GS105SID', 'SID']
 
 
 class GS108Switch(object):
@@ -20,7 +20,7 @@ class GS108Switch(object):
         self.cookie_content = None
         self.sleep_time = 0.25
         self.timeout = 15.000
-        self.ports = 8
+        self.ports = 5
         self._previous_data = {
             'tx': [0] * self.ports,
             'rx': [0] * self.ports,

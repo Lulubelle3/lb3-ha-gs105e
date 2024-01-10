@@ -131,7 +131,7 @@ class NetgearFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
         await self.async_set_unique_id(unique_id, raise_on_progress=False)
         self._abort_if_unique_id_configured(updates=config_data)
 
-        name = f'GS108E {host}'
+        name = f'GS105E {host}'
 
         return self.async_create_entry(
             title=name,
