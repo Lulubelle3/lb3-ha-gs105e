@@ -1,10 +1,10 @@
 {
-  "domain": "ckw_hass_gs108e",
-  "name": "Netgear GS108e Integration",
-  "documentation": "https://github.com/ckarrie/ckw-ha-gs108e/blob/main/README.md",
+  "domain": "lb3-ha-gs105e",
+  "name": "Netgear GS105e Integration",
+  "documentation": "https://github.com/Lulubelle3/lb3-ha-gs105e/blob/main/README.md",
   "config_flow": true,
   "iot_class": "local_polling",
   "codeowners": [],
   "requirements": ["lxml>=4.6.1"],
-  "version": "0.5.1"
+  "version": "0.6.1"
 }
